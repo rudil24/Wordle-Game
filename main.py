@@ -127,7 +127,7 @@ class Wordle:
                 b = tk.Button(
                     f[index],
                     text=chr(c),
-                    font="cambria 13 bold",
+                    font=("Poppins", 13, "bold"),
                     bg=self.BG,
                     fg=key_pad_color,
                     cursor="hand2",
@@ -143,7 +143,7 @@ class Wordle:
                 b = tk.Button(
                     f[index],
                     text="Enter",
-                    font="cambria 13 bold",
+                    font=("Poppins", 13, "bold"),
                     bg=self.BG,
                     fg=key_pad_color,
                     cursor="hand2",
@@ -156,7 +156,7 @@ class Wordle:
                 b = tk.Button(
                     f[index],
                     text="←",
-                    font="cambria 13 bold",
+                    font=("Poppins", 13, "bold"),
                     bg=self.BG,
                     fg=key_pad_color,
                     cursor="hand2",
@@ -171,7 +171,7 @@ class Wordle:
         self.status_bar = tk.Label(
             self.root,
             text=f"Score : {self.score}",
-            font="cambria 10 bold",
+            font=("Poppins", 10, "bold"),
             anchor="w",
             padx=10,
             background="#242424",
@@ -184,11 +184,9 @@ class Wordle:
         self.root.mainloop()
 
     def show_buttons(self):
-        if self.buttons:
-            for b in self.buttons:
-                if b:
-                    for i in b:
-                        i.destroy()
+        for frame in self.button_frames:
+            for widget in frame.winfo_children():
+                widget.destroy()
 
         self.b_row1 = self.b_row2 = self.b_row3 = self.b_row4 = self.b_row5 = (
             self.b_row6
@@ -202,18 +200,22 @@ class Wordle:
             row_btn = []
             self.button_frames[i].pack(pady=4)
             for j in range(self.word_size):
+                container = tk.Frame(
+                    self.button_frames[i], bg="#505050", padx=2, pady=2
+                )
+                container.pack(side="left", padx=2)
+
                 b = tk.Label(
-                    self.button_frames[i],
+                    container,
                     text="",
                     fg="white",
-                    bd=2,
-                    relief="solid",
-                    font="lucida 18",
+                    bd=0,
+                    font=("Poppins", 18),
                     bg=self.BG,
                     width=4,
                     height=2,
                 )
-                b.pack(side="left", padx=2)
+                b.pack()
 
                 row_btn.append(b)
             self.buttons.append(row_btn)
@@ -226,7 +228,7 @@ class Wordle:
             elif e.keysym == "Return":
                 self.check_for_match()
 
-            elif 65 <= e.keycode <= 90:
+            elif e.char.isalpha() and len(e.char) == 1:
                 key = e.char
                 if self.current_b == self.word_size:
                     self.current_b = self.word_size - 1
@@ -395,7 +397,7 @@ class Wordle:
             status = "You Won !!!"
 
         status_label = tk.Label(
-            popup, text=status, font="cambria 20 bold", fg="#14f41f", bg="black"
+            popup, text=status, font=("Poppins", 20, "bold"), fg="#14f41f", bg="black"
         )
         status_label.pack(pady=10)
 
@@ -403,7 +405,7 @@ class Wordle:
             right_word = tk.Label(
                 popup,
                 text=f"The word was {self.word_api.word}",
-                font="cambria 15 bold",
+                font=("Poppins", 15, "bold"),
                 fg="#14f41f",
                 bg="black",
             )
@@ -412,7 +414,7 @@ class Wordle:
         score_label = tk.Label(
             popup,
             text=f"Score : {self.score}",
-            font="lucida 15 bold",
+            font=("Poppins", 15, "bold"),
             fg="white",
             bg="black",
         )
@@ -421,7 +423,7 @@ class Wordle:
         high_score_label = tk.Label(
             popup,
             text=f"High Score : {self.high_score}",
-            font="lucida 15 bold",
+            font=("Poppins", 15, "bold"),
             fg="white",
             bg="black",
         )
@@ -430,7 +432,7 @@ class Wordle:
         button = tk.Button(
             popup,
             text="Okay",
-            font="lucida 12 bold",
+            font=("Poppins", 12, "bold"),
             fg="#00d0ff",
             cursor="hand2",
             bg="#252525",

@@ -43,7 +43,7 @@ class Settings:
             length_frame,
             text="Size",
             background=self.BG,
-            font="cambria 15 bold",
+            font=("Poppins", 15, "bold"),
             fg="#14f41f",
         ).grid(row=0, column=0, padx=12)
 
@@ -60,7 +60,7 @@ class Settings:
         decrease_len_btn.bind("<Leave>", self.off_hover)
 
         self.word_length = tk.Label(
-            length_frame, background=self.BG, font="cambria 15 bold", fg="white"
+            length_frame, background=self.BG, font=("Poppins", 15, "bold"), fg="white"
         )
         self.word_length.grid(row=0, column=2, padx=15)
 
@@ -83,7 +83,7 @@ class Settings:
             score_frame,
             text="Score",
             background=self.BG,
-            font="cambria 15 bold",
+            font=("Poppins", 15, "bold"),
             fg="#14f41f",
         ).grid(row=0, column=0, padx=10)
 
@@ -100,7 +100,7 @@ class Settings:
         decrease_score_btn.bind("<Leave>", self.off_hover)
 
         self.high_score = tk.Label(
-            score_frame, background=self.BG, font="cambria 15 bold", fg="white"
+            score_frame, background=self.BG, font=("Poppins", 15, "bold"), fg="white"
         )
         self.high_score.grid(row=0, column=2, padx=15)
 
@@ -122,7 +122,7 @@ class Settings:
             self.window,
             text="Change",
             command=self.change_db,
-            font="lucida 12 bold",
+            font=("Poppins", 12, "bold"),
             bg="black",
             fg="sky blue",
             cursor="hand2",
