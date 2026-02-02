@@ -200,17 +200,19 @@ class Wordle:
             row_btn = []
             self.button_frames[i].pack(pady=4)
             for j in range(self.word_size):
+                # Changed to Frame container to create a border effect around the Label
                 container = tk.Frame(
                     self.button_frames[i], bg="#505050", padx=2, pady=2
                 )
                 container.pack(side="left", padx=2)
 
+                # Changed from Button to Label to fix background color rendering on macOS
                 b = tk.Label(
                     container,
                     text="",
                     fg="white",
                     bd=0,
-                    font=("Poppins", 18),
+                    font=("Poppins", 18),  # Updated font
                     bg=self.BG,
                     width=4,
                     height=2,
@@ -228,6 +230,7 @@ class Wordle:
             elif e.keysym == "Return":
                 self.check_for_match()
 
+            # Changed logic to use isalpha() for robust cross-platform keyboard input
             elif e.char.isalpha() and len(e.char) == 1:
                 key = e.char
                 if self.current_b == self.word_size:
@@ -442,6 +445,7 @@ class Wordle:
         button.pack(pady=4)
 
         # disable the main window, will get enabled only when popup is closed
+        # Used grab_set() instead of attributes('-disabled') for cross-platform compatibility
         popup.grab_set()
 
         def close():
@@ -518,6 +522,7 @@ class Wordle:
         connection.close()
 
     def open_setting(self):
+        # Assigned to instance variable to prevent garbage collection closing the window immediately
         self.setting_window = st.Settings(self)
 
     def on_hover(self, e):

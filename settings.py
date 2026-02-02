@@ -18,6 +18,7 @@ class Settings:
 
         self.window.protocol("WM_DELETE_WINDOW", self.close)
 
+        # Used grab_set() for cross-platform modal behavior
         self.window.grab_set()
 
         x_co = int(self.functions.width / 2 - (400 / 2)) + self.functions.x_co
@@ -26,6 +27,7 @@ class Settings:
         self.window.geometry(f"400x200+{x_co}+{y_co}")
         self.window.config(background=self.BG)
 
+        # Stored images in self to prevent garbage collection
         self.increase = Image.open("images/increase.png")
         self.increase = self.increase.resize((40, 40), Image.Resampling.LANCZOS)
         self.increase = ImageTk.PhotoImage(self.increase)
@@ -43,7 +45,7 @@ class Settings:
             length_frame,
             text="Size",
             background=self.BG,
-            font=("Poppins", 15, "bold"),
+            font=("Poppins", 15, "bold"),  # Updated font
             fg="#14f41f",
         ).grid(row=0, column=0, padx=12)
 
